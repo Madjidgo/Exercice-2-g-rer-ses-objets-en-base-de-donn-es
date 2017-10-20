@@ -22,6 +22,8 @@
         <!-- Add your site or application content here -->
         <p>Hello world! This is HTML5 Boilerplate.</p>
 
+        <?php require('Modeles/CatsManager.php') ?>
+
         <form action="Controleurs/Cats.php" method="post" >
 	
 	<input type="text" name="nom" value="" placeholder="nom">

@@ -1,9 +1,9 @@
 <?php
-class bdd{
- public function db(){
 
 
-  try {
+
+	  try
+	   {
        $db = new PDO('mysql:host=localhost;dbname=Cats;charset=utf8', 'phpmyadmin', 'maD24101975');
    }
 
@@ -14,8 +14,44 @@ class bdd{
        die('Erreur : ' . $e->getMessage());
 
    }
-   return $db;
-}
+
+
+class CatsManager
+
+{
+
+  private $_db; // Instance de PDO.
+
+
+  public function __construct($db)
+
+  {
+
+    $this->setDb($db);
+
+  }
+
+ 
+  // create add insert
+  public function add(Chat $perso)
+  {
+
+  }
+
+// read SELECT
+  public function get($id){
+
+  }
+
+  // uptade
+  public function update(Chat $perso){
+
+  }
+
+  // delete
+  public function delete(Chat$perso){
+
+  }
 }
 
- ?>
+
