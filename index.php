@@ -22,6 +22,18 @@
         <!-- Add your site or application content here -->
         <p>Hello world! This is HTML5 Boilerplate.</p>
 
+        <form action="Controleurs/Cats.php" method="post" >
+	
+	<input type="text" name="nom" value="" placeholder="nom">
+	<input type="number" name="age" value="" placeholder=age"">
+	<input type="text" name="sewe" value="" placeholder="sexe">
+	<input type="text" name="couleur" value="" placeholder="couleur">
+
+	<input type="submit" name="submit" value="Envoyer" placeholder="">
+	
+	
+</form>
+
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
@@ -38,3 +50,4 @@
         </script>
     </body>
 </html>
+
