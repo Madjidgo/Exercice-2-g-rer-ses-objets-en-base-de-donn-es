@@ -1,57 +1,103 @@
 <?php
 
 
-
-	  try
-	   {
-       $db = new PDO('mysql:host=localhost;dbname=Cats;charset=utf8', 'phpmyadmin', 'maD24101975');
-   }
-
-   catch (Exception $e)
-
-   {
-
-       die('Erreur : ' . $e->getMessage());
-
-   }
-
-
 class CatsManager
 
 {
 
-  private $_db; // Instance de PDO.
+  private $_db;
 
 
-  public function __construct($db)
+    /**
+     * CatsManager constructor.
+     * @param $db
+     */
+    public function __construct($db)
 
   {
 
     $this->setDb($db);
 
   }
+  
 
- 
-  // create add insert
-  public function add(Chat $perso)
+  public function setDb($db)
   {
+
+   $this->_db=  $db;
+   
+  }
+
+
+
+  // create add insert
+  public function add( $chat)
+  {
+    $req = $this->_db->prepare( 'INSERT INTO Cats(name,age,sexe,color) VALUES( :name, :age, :sexe, :color)');
+
+    $req->bindValue(':name',$chats->getName());
+    $req->bindValue(':age',$chats->getAge(), PDO::PARAM_INT);
+    $req->bindValue(':sexe',$chats->getSexe());
+    $req->bindValue(':color',$chats->getColor());
+
+    $req->execute();
+  
+
+  }
+
+
+// update
+    public function update( $chat)
+  {
+    $req = $this->_db->prepare( 'UPDATE  Cats SET name = :name, age = :age, sexe = :sexe, color = :color WHERE id = :id');
+
+    $req->bindValue(':name',$chats->getName());
+    $req->bindValue(':age',$chats->getAge(), PDO::PARAM_INT);
+    $req->bindValue(':sexe',$chats->getSexe());
+    $req->bindValue(':color',$chats->getColor());
+    $req->binValue(':id',$chats->id(),PDO::PARAM_INT);
+
+    $req->execute();
+  
 
   }
 
 // read SELECT
-  public function get($id){
 
-  }
+    /**
+     * @return Cats
+     */
+    public function getList()
+      {
+        $chats = [];
+        $req = $this->_db->query('SELECT * FROM Chat');
+        $persoChat = $req->fetchAll(PDO::FETCH_ASSOC);
 
-  // uptade
-  public function update(Chat $perso){
 
-  }
+      foreach ($persoChat as $key => $value) 
+        {
+        /** @var TYPE_NAME $persoChat */
+        
+
+
+      $value = new Cats($value);
+        }
+
+      return $persoChat;
+      }
+
 
   // delete
-  public function delete(Chat$perso){
 
-  }
+    /**
+     * @param $chats
+     */
+    public function delete($chats)
+    {
+
+      $req = $this->_db->prepare('DELETE FROM  Chat WHERE id  = :id' );
+      $req->binValue(':id',$chats->id(),PDO::PARAM_INT);
+
+      $req->execute();
+    }
 }
-
-

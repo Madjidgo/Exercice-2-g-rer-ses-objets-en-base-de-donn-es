@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.4">
+    <root id="1"/>
+    <schema id="2" parent="1" name="atelierCrud">
+      <Current>1</Current>
+    </schema>
+    <schema id="3" parent="1" name="blog"/>
+    <schema id="4" parent="1" name="Cats"/>
+    <schema id="5" parent="1" name="colyseum"/>
+    <schema id="6" parent="1" name="combat">
+      <Visible>1</Visible>
+    </schema>
+    <schema id="7" parent="1" name="Ecommerce"/>
+    <schema id="8" parent="1" name="espace_membres"/>
+    <schema id="9" parent="1" name="exo"/>
+    <schema id="10" parent="1" name="information_schema"/>
+    <schema id="11" parent="1" name="insert"/>
+    <schema id="12" parent="1" name="mini_chat"/>
+    <schema id="13" parent="1" name="Mor2"/>
+    <schema id="14" parent="1" name="Moreau"/>
+    <schema id="15" parent="1" name="mysql"/>
+    <schema id="16" parent="1" name="performance_schema"/>
+    <schema id="17" parent="1" name="PersonnageManager"/>
+    <schema id="18" parent="1" name="phpmyadmin"/>
+    <schema id="19" parent="1" name="sys"/>
+    <schema id="20" parent="1" name="wordpress"/>
+    <table id="21" parent="6" name="Personnages"/>
+    <column id="22" parent="21" name="id">
+      <Position>1</Position>
+      <DataType>smallint(5) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="23" parent="21" name="nom">
+      <Position>2</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="24" parent="21" name="degats">
+      <Position>3</Position>
+      <DataType>tinyint(3) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <index id="25" parent="21" name="nom">
+      <ColNames>nom</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="26" parent="21" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="27" parent="21" name="nom">
+      <ColNames>nom</ColNames>
+      <UnderlyingIndexName>nom</UnderlyingIndexName>
+    </key>
+  </database-model>
+</dataSource>

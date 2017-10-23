@@ -1,30 +1,58 @@
 <?php
 class Cats{
-protected $_nom;
-protected $_age;
-protected $_couleur;
+          protected $_name;
+          protected $_age;
+          protected $_color;
+          protected $_sexe;
 
-const Sexe = array(
-  'M'=>"Malle",
-  'F'=>"Femelle"
-);
+const MALE = "masculin";
+const FEMALE = "feminin";
 
 // const
 
-public  function __construct($nom,$age,$couleur,$sexe)
-{
- $this->setAge($age);
- $this->setNom($nom);
- $this->setCouleur($couleur);
 
+
+public function __construct(array $data){
+
+$this->hydrate( $data);
+
+
+}
+
+    /**
+     * @param array $data
+     */
+    public function hydrate(array $data)
+{
+
+foreach ($data as $key => $value)
+  {
+  # code...
+
+
+     $method = 'set'.ucfirst($key);
+     if (method_exists($this, $method))
+
+    {
+    $this->$method($value);
+      // …
+    }
+
+  }
 }
 
     /**
      * @return mixed
      */
-    public function getNom()
+
+    public function getId()
     {
-        return $this->_nom;
+        return $this->_sex;
+    }
+
+    public function getName()
+    {
+        return $this->_name;
     }
 
     /**
@@ -38,33 +66,57 @@ public  function __construct($nom,$age,$couleur,$sexe)
     /**
      * @return mixed
      */
-    public function getCouleur()
+    public function getColor()
     {
-        return $this->_couleur;
+        return $this->_color;
+    }
+
+
+    public function getSexe()
+    {
+        return $this->_sexe;
+    }
+
+
+
+    // SETTERS
+
+    public function setId($id){
+        $this->_id = $id;
     }
 
     /**
      * @param mixed $age
      */
-    public function setAge( int $age)
+    public function setAge($age)
     {
+        $age = (int)$age;
+        if($age>=0 && $age<=30){
         $this->_age = $age;
     }
-
+    }
     /**
-     * @param mixed $couleur
+     * @param mixed $color
      */
-    public function setCouleur(string $couleur)
+    public function setColor($color)
     {
-        $this->_couleur = $couleur;
+        if (is_string($color)) {
+        $this->_color = $color;}
     }
 
     /**
-     * @param mixed $nom
+     * @param mixed $name
      */
-    public function setNom( string $nom)
+    public function setName($name)
     {
-        $this->_nom = $nom;
+       
+        if (is_string($name)) {
+        $this->_name = $name;}
+    
+    }
+
+    public function setSexe($sexe){
+        $this->_sexe = $sexe;
     }
 
 
