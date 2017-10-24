@@ -1,4 +1,5 @@
-<?php
+<?php 
+declare(strict_types=1);
 class Cats{
           protected $_name;
           protected $_age;
@@ -14,7 +15,7 @@ const FEMALE = "feminin";
 
 public function __construct(array $data){
 
-$this->hydrate( $data);
+$this->hydrate($data);
 
 
 }
@@ -28,9 +29,9 @@ $this->hydrate( $data);
 foreach ($data as $key => $value)
   {
   # code...
+var_dump($data[$key]);
 
-
-     $method = 'set'.ucfirst($key);
+     $method = 'set' . ucfirst($key);
      if (method_exists($this, $method))
 
     {
@@ -40,16 +41,17 @@ foreach ($data as $key => $value)
 
   }
 }
+    /**
+     * @return mixed
+     */
+    public function getID()
+    {
+        return $this->_id;
+    }
 
     /**
      * @return mixed
      */
-
-    public function getId()
-    {
-        return $this->_sex;
-    }
-
     public function getName()
     {
         return $this->_name;
@@ -79,10 +81,13 @@ foreach ($data as $key => $value)
 
 
 
-    // SETTERS
-
-    public function setId($id){
-        $this->_id = $id;
+    /**
+     * @param mixed $id
+     */
+    public function setIdid($id)
+    {
+        $id = (int)$int;
+       $this->_id = $id; 
     }
 
     /**
@@ -91,7 +96,7 @@ foreach ($data as $key => $value)
     public function setAge($age)
     {
         $age = (int)$age;
-        if($age>=0 && $age<=30)
+        if($age>=1 && $age<=30)
         {
         $this->_age = $age;
          }
@@ -122,10 +127,12 @@ foreach ($data as $key => $value)
 
     public function setSexe($sexe)
     {
+          if (is_string($sexe))
+         {
         $this->_sexe = $sexe;
+        }
+
     }
-
-
 }
 
  ?>

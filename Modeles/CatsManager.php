@@ -33,21 +33,33 @@ class CatsManager
     /**
      * @return Cats
      */
+
+    // get all cats
     public function getList()
       {
-        $req = $this->_db->query('SELECT * FROM Chat');
+        $req = $this->_db->prepare('SELECT * FROM Chat');
+        $req->execute();
+
         $chats = $req->fetchAll(PDO::FETCH_ASSOC);
 
 
-
-
-      foreach ($chats as $key => $value) 
-        {
-      $chats[$key] = new Cats($value);
-       
-        }
-
       return $chats;
+      }
+
+
+      // get one cat
+      public function get($id)
+      {
+        $req= $this->_db->prepare('SELECT * FROM Chat WHERE id = :id');
+
+        
+        $req->execute(array(
+          'id' => $id
+        ));
+
+         $chats = $req->fetch(PDO::FETCH_ASSOC);
+         
+        return new Cats($chats);
       }
 
 
@@ -57,7 +69,7 @@ class CatsManager
   // create add insert
   public function add(Cats $chats)
   {
-    $req = $this->_db->prepare( 'INSERT INTO Cats(name,age,sexe,color) VALUES( :name, :age, :sexe, :color)');
+    $req = $this->_db->prepare( 'INSERT INTO Chat(name,age,sexe,color) VALUES( :name, :age, :sexe, :color)');
 
     $req->bindValue(':name',$chats->getName());
     $req->bindValue(':age',$chats->getAge(), PDO::PARAM_INT);
@@ -73,13 +85,13 @@ class CatsManager
 // update
     public function update( Cats $chats)
   {
-    $req = $this->_db->prepare( 'UPDATE  Cats SET name = :name, age = :age, sexe = :sexe, color = :color WHERE id = :id');
+    $req = $this->_db->prepare( 'UPDATE  Chat SET name = :name, age = :age, sexe = :sexe, color = :color WHERE id = :id');
 
     $req->bindValue(':name',$chats->getName());
     $req->bindValue(':age',$chats->getAge(), PDO::PARAM_INT);
     $req->bindValue(':sexe',$chats->getSexe());
     $req->bindValue(':color',$chats->getColor());
-    $req->binValue(':id',$chats->id(),PDO::PARAM_INT);
+    $req->bindValue(':id',$chats->id(),PDO::PARAM_INT);
 
     $req->execute();
   
@@ -92,11 +104,11 @@ class CatsManager
     /**
      * @param $chats
      */
-    public function delete(Cats $chats)
+    public function delete( $chats)
     {
 
       $req = $this->_db->prepare('DELETE FROM  Chat WHERE id  = :id' );
-      $req->binValue(':id',$chats->id(),PDO::PARAM_INT);
+      $req->bindValue(':id',$chats,PDO::PARAM_INT);
 
       $req->execute();
     }

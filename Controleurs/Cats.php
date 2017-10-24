@@ -5,19 +5,17 @@ $manager = new CatsManager($db);
 
 
 //ajouter chat 
-   if (isset($_POST['name'])&&
-   		isset($_POST['age']) &&
-   		isset($_POST['sexe'])&&
-   		isset($_POST['color']))
-   	  
+   if (isset($_POST['name']) AND isset($_POST['age']) AND isset($_POST['sexe']) AND isset($_POST['name']))
+
 {
-	$data = ["name" => $_POST['name'], 
+	$chat = new Cats([
+			 "name" => $_POST['name'], 
 			 "age"	=> $_POST['age'],
 			 "sexe" => $_POST['sexe'],
 			 "color"=> $_POST['color']
-			];
+			]);
+	
 
-	$chat[] = new Cats($data);
 	$manager->add($chat);
 
 	//redirection
@@ -25,14 +23,15 @@ $manager = new CatsManager($db);
 
 
 }
+
+
   else if (isset($_POST['delete']))
 {
-	$_Post['delete'] = $delete ;
+	 $delete = $_POST['id'] ;
 	$manager->delete($delete);
 	header("Location: index.php");
-} 
 
-
+}
 
 
 $chats = $manager->getList();

@@ -15,56 +15,52 @@
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
     <body>
-        <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-
-        <!-- Add your site or application content here -->
+       
 
         <p>Liste des chats</p>
-<form action="index.php" method="post" >
+<form action="" method="post" >
 
 	<input type="text" name="name" value="" placeholder="name">
 	<input type="number" name="age" value="" placeholder=age>
-	<input type="radio" id="genderChoice1" name="gender" value="male">
-    <label for="genderChoice1">Male</label>
 
-    <input type="radio" id="genderChoice2" name="gender" value="female">
-    <label for="genderChoice2">Female</label>
-
+    <input type="text" name="sexe" value="" placeholder="sexe">
 	<input type="text" name="color" value="" placeholder="color">
 
 	<input type="submit" name="submit" value="Envoyer" placeholder="">
 </form>
 
 <?php
+ 
+ //var_dump($chats);
 
 
 // $chats = new Cats(array());
 /** @var TYPE_NAME $chats */
-foreach ($chats as $key => $chat)
-    
- {
+foreach ($chats as $key => $value)
+{
 
 ?>
 	<p>
-
-		<span><?php echo $chat->getName();?></span> 
-		<span><?php echo $chat->getAge(); ?></span> 
-		<span><?php echo $chat->getSexe();?></span>
-		<span><?php echo $chat->getColor();?></span>
+		<span><?php echo $value['name'];?></span> 
+		<span><?php echo $value['age']; ?></span> 
+		<span><?php echo $value['sexe'];?></span>
+		<span><?php echo $value['color'];?></span>
 
 
 		 <form action="index.php" method="post">
-			<input type="hidden" name="delete" value="<?php echo $chat->id; ?>">
-			<input type="submit" name="" value="supprimer">
+			<input type="hidden" name="id" value="<?php echo $value['id']; ?>">
+			<input type="submit" name="delete" value="supprimer">
+            
 		</form>
+        <a href="chat.php?id=<?php echo $value['id']?>">Voir</a>
 	</p>
 
 
 <?php 
 } 
 ?> 
+
+
 
 
 <!-- footer -->
