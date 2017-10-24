@@ -20,41 +20,54 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
+
         <p>Liste des chats</p>
 <form action="index.php" method="post" >
 
-	<input type="text" name="nom" value="" placeholder="nom">
+	<input type="text" name="name" value="" placeholder="name">
 	<input type="number" name="age" value="" placeholder=age>
-	<input type="text" name="sexe" value="" placeholder="sexe">
-	<input type="text" name="couleur" value="" placeholder="couleur">
+	<input type="radio" id="genderChoice1" name="gender" value="male">
+    <label for="genderChoice1">Male</label>
+
+    <input type="radio" id="genderChoice2" name="gender" value="female">
+    <label for="genderChoice2">Female</label>
+
+	<input type="text" name="color" value="" placeholder="color">
 
 	<input type="submit" name="submit" value="Envoyer" placeholder="">
 </form>
 
-<?php 
+<?php
 
-foreach ($chats as $key => $chat) {
-}
+
+// $chats = new Cats(array());
+/** @var TYPE_NAME $chats */
+foreach ($chats as $key => $chat)
+    
+ {
+
 ?>
 	<p>
-		<span><?php echo $chat->name;?></span> 
-		<span></span> 
-		<span></span>
-		 <form action="index.php" method="post" accept-charset="utf-8">
+
+		<span><?php echo $chat->getName();?></span> 
+		<span><?php echo $chat->getAge(); ?></span> 
+		<span><?php echo $chat->getSexe();?></span>
+		<span><?php echo $chat->getColor();?></span>
+
+
+		 <form action="index.php" method="post">
 			<input type="hidden" name="delete" value="<?php echo $chat->id; ?>">
 			<input type="submit" name="" value="supprimer">
 		</form>
-</p>
-<? 
+	</p>
+
+
+<?php 
 } 
-?>
+?> 
 
 
-
-<?
-
-
-
+<!-- footer -->
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>

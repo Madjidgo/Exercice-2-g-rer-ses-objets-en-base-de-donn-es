@@ -19,7 +19,7 @@ class CatsManager
     $this->setDb($db);
 
   }
-  
+
 
   public function setDb($db)
   {
@@ -28,10 +28,34 @@ class CatsManager
    
   }
 
+  // read SELECT
+
+    /**
+     * @return Cats
+     */
+    public function getList()
+      {
+        $req = $this->_db->query('SELECT * FROM Chat');
+        $chats = $req->fetchAll(PDO::FETCH_ASSOC);
+
+
+
+
+      foreach ($chats as $key => $value) 
+        {
+      $chats[$key] = new Cats($value);
+       
+        }
+
+      return $chats;
+      }
+
+
+
 
 
   // create add insert
-  public function add( $chat)
+  public function add(Cats $chats)
   {
     $req = $this->_db->prepare( 'INSERT INTO Cats(name,age,sexe,color) VALUES( :name, :age, :sexe, :color)');
 
@@ -47,7 +71,7 @@ class CatsManager
 
 
 // update
-    public function update( $chat)
+    public function update( Cats $chats)
   {
     $req = $this->_db->prepare( 'UPDATE  Cats SET name = :name, age = :age, sexe = :sexe, color = :color WHERE id = :id');
 
@@ -62,37 +86,13 @@ class CatsManager
 
   }
 
-// read SELECT
-
-    /**
-     * @return Cats
-     */
-    public function getList()
-      {
-        $chats = [];
-        $req = $this->_db->query('SELECT * FROM Chat');
-        $persoChat = $req->fetchAll(PDO::FETCH_ASSOC);
-
-
-      foreach ($persoChat as $key => $value) 
-        {
-        /** @var TYPE_NAME $persoChat */
-        
-
-
-      $value = new Cats($value);
-        }
-
-      return $persoChat;
-      }
-
 
   // delete
 
     /**
      * @param $chats
      */
-    public function delete($chats)
+    public function delete(Cats $chats)
     {
 
       $req = $this->_db->prepare('DELETE FROM  Chat WHERE id  = :id' );

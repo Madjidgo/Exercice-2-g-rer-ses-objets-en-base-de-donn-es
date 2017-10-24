@@ -35,7 +35,7 @@ foreach ($data as $key => $value)
 
     {
     $this->$method($value);
-      // …
+     
     }
 
   }
@@ -91,17 +91,20 @@ foreach ($data as $key => $value)
     public function setAge($age)
     {
         $age = (int)$age;
-        if($age>=0 && $age<=30){
+        if($age>=0 && $age<=30)
+        {
         $this->_age = $age;
-    }
+         }
     }
     /**
      * @param mixed $color
      */
     public function setColor($color)
     {
-        if (is_string($color)) {
-        $this->_color = $color;}
+        if (is_string($color))
+         {
+        $this->_color = $color;
+        }
     }
 
     /**
@@ -110,12 +113,15 @@ foreach ($data as $key => $value)
     public function setName($name)
     {
        
-        if (is_string($name)) {
-        $this->_name = $name;}
+        if (is_string($name))
+         {
+        $this->_name = $name;
+        }
     
     }
 
-    public function setSexe($sexe){
+    public function setSexe($sexe)
+    {
         $this->_sexe = $sexe;
     }
 
